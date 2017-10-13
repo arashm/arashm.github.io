@@ -11,7 +11,7 @@ path: /blog
     {% for post in posts %}
       <li>
         <div style='display: inline-block'>
-          <a href="{{ post.path }}">{{ post.title }}</a>
+          <a href="/{{ post.path }}">{{ post.title }}</a>
         </div>
         <span>({{ post.date | date: "%b %d, %Y" }})</span>
       </li>
