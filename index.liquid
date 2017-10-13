@@ -3,6 +3,7 @@ extends: default.liquid
 title: Arash Mousavi
 route: /
 ---
+{{ include "_layouts/_variables.liquid" }}
 <div class='content'>
   <header>
     <h1>Arash Mousavi</h1>
@@ -15,15 +16,15 @@ route: /
   </header>
 
   <section class='socials'>
-    <a href="https://twitter.com/theariom" target="_blank" title='Twitter'>
+    <a href={{twitter_url}} target="_blank" title='Twitter'>
       <i class='icon-twitter'></i>
     </a>
 
-    <a href="https://github.com/arashm" target="_blank" title='Github'>
+    <a href={{github_url}} target="_blank" title='Github'>
       <i class='icon-github'></i>
     </a>
 
-    <a href="https://linkedin.com/in/arashmousavi" target="_blank" title='Linkedin'>
+    <a href={{linkedin_url}} target="_blank" title='Linkedin'>
       <i class='icon-linkedin'></i>
     </a>
   </section>
