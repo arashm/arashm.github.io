@@ -1,5 +1,6 @@
 source: ./
 dest: ./build
+posts: blog
 ignore: ["README.md", "build/*", ".git/*"]
 name: Arash Mousavi
 link: http://routes.ir

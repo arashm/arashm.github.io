@@ -1,5 +1,139 @@
 @charset "UTF-8";
 
+/*
+ * CSS Reset
+*/
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block
+}
+
+body {
+  line-height: 1
+}
+
+ol,
+ul {
+  list-style: none
+}
+
+blockquote,
+q {
+  quotes: none
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: '';
+  content: none
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
 @font-face {
   font-family: IRANSans;
   font-style: normal;
@@ -35,7 +169,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   line-height: 1;
-  height: 0em;
+  height: 0rem;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -301,6 +435,15 @@ i.inverted.icon {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+    text-decoration: none;
+    color: #259c9c;
+    transition: color .5s;
+}
+
+a:hover {
+    color: #5ac1b9;
+}
 
 body.blog {
   border-top: 4px solid #00b5ad;
@@ -339,31 +482,31 @@ body.blog {
 .blog h6 {
   font-family: 'IRANSans', tahoma;
   font-weight: bold;
-  margin: 1em 0;
+  margin: 1rem 0;
 }
 
 .blog h1 {
-  font-size: 1.6em;
+  font-size: 1.6rem;
 }
 
 .blog h2 {
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 
 .blog h3 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 .blog h4 {
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 
 .blog h5 {
-  font-size: 1.05em;
+  font-size: 1.05rem;
 }
 
 .blog h6 {
-  font-size: 1.05em;
+  font-size: 1.05rem;
 }
 
 .blog .title {

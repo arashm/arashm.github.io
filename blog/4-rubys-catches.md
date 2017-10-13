@@ -112,17 +112,17 @@ end
 
 ```ruby
 MY_SCOPE = 'Global'
-  
+
 module Foo
   MY_SCOPE = 'Foo Module'
-  
+
   class Bar
     def scope1
       puts MY_SCOPE
     end
   end
 end
-  
+
 class Foo::Bar
   def scope2
     puts MY_SCOPE
@@ -178,7 +178,7 @@ render :show
 class Foo
   def self.bar=(value)
     @foo = value
-  
+
     return 'OK'
   end
 end
@@ -202,7 +202,7 @@ puts 'Assigned' if (Foo.bar = 3) == 'OK' # => nil
 
 ```ruby
 class Foo
-  
+
   private
   def self.bar
     puts 'Not-so-private class method called'
@@ -223,10 +223,10 @@ Foo.bar # => "Not-so-private class method called"
 class Foo
 
   class << self
-    private    
+    private
     def bar
       puts 'Class method called'
-    end    
+    end
   end
 
   def self.baz
