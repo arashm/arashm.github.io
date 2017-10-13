@@ -1,0 +1,525 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: 300;
+  src: url('/assets/fonts/IRANSansWeb_Light.eot');
+  src: url('/assets/fonts/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+  url('/assets/fonts/IRANSansWeb_Light.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+  url('/assets/fonts/IRANSansWeb_Light.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('/assets/fonts/IRANSansWeb_Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: bold;
+  src: url('/assets/fonts/IRANSansWeb_Bold.eot');
+  src: url('/assets/fonts/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+  url('/assets/fonts/IRANSansWeb_Bold.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+  url('/assets/fonts/IRANSansWeb_Bold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  url('/assets/fonts/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
+/*
+ * Blog
+*/
+
+/*******************************
+            Divider
+*******************************/
+
+.divider {
+  margin: 1rem 0rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  line-height: 1;
+  height: 0em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.vertical.divider,
+.horizontal.divider {
+  position: absolute;
+  border: none;
+  height: 0em;
+  margin: 0em;
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/*--------------
+    Vertical
+---------------*/
+
+.vertical.divider {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin: 0% 0% 0% -3%;
+  width: 6%;
+  height: 50%;
+  line-height: 0;
+  padding: 0em;
+}
+
+.vertical.divider:before,
+.vertical.divider:after {
+  position: absolute;
+  left: 50%;
+  content: " ";
+  z-index: 3;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
+  width: 0%;
+  height: 80%;
+}
+
+.vertical.divider:before {
+  top: -100%;
+}
+
+.vertical.divider:after {
+  top: auto;
+  bottom: 0px;
+}
+
+/*--------------
+    Horizontal
+---------------*/
+
+.horizontal.divider {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  margin: 1rem 1.5rem;
+  height: auto;
+  padding: 0em;
+  line-height: 1;
+}
+
+.horizontal.divider:before,
+.horizontal.divider:after {
+  position: absolute;
+  top: 50%;
+  content: " ";
+  z-index: 3;
+  width: 50%;
+  top: 50%;
+  height: 0%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.horizontal.divider:before {
+  left: 0%;
+  margin-left: -1.5rem;
+}
+
+.horizontal.divider:after {
+  left: auto;
+  right: 0%;
+  margin-right: -1.5rem;
+}
+
+/*--------------
+      Icon
+---------------*/
+
+.divider>.icon {
+  margin: 0em;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+/*******************************
+            Variations
+*******************************/
+
+/*--------------
+    Inverted
+---------------*/
+
+.divider.inverted {
+  color: rgba(255, 255, 255, 1);
+}
+
+.vertical.inverted.divider,
+.horizontal.inverted.divider {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.divider.inverted,
+.divider.inverted:after,
+.divider.inverted:before {
+  border-top-color: rgba(0, 0, 0, 0.15);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  border-left-color: rgba(0, 0, 0, 0.15);
+  border-right-color: rgba(255, 255, 255, 0.15);
+}
+
+/*--------------
+    Fitted
+---------------*/
+
+.fitted.divider {
+  margin: 0em;
+}
+
+/*--------------
+    Clearing
+---------------*/
+
+.clearing.divider {
+  clear: both;
+}
+
+/*--------------
+    Section
+---------------*/
+
+.section.divider {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+i.icon {
+  display: inline-block;
+  opacity: 0.75;
+  margin: 0em 0.25em 0em 0em;
+  width: 1.23em;
+  height: 1em;
+  font-style: normal;
+  line-height: 1;
+  font-weight: normal;
+  text-decoration: inherit;
+  text-align: center;
+  speak: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+/*-------------------
+Circular
+--------------------*/
+
+i.circular.icon {
+  border-radius: 500em !important;
+  padding: 0.5em 0.35em !important;
+  -webkit-box-shadow: 0em 0em 0em 0.1em rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0em 0em 0em 0.1em rgba(0, 0, 0, 0.1) inset;
+  line-height: 1 !important;
+  width: 2em !important;
+  height: 2em !important;
+}
+
+i.circular.inverted.icon {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/*-------------------
+Flipped
+--------------------*/
+
+i.flipped.icon,
+i.horizontally.flipped.icon {
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+i.vertically.flipped.icon {
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+/*-------------------
+Rotated
+--------------------*/
+
+i.rotated.icon,
+i.right.rotated.icon,
+i.clockwise.rotated.icon {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+i.left.rotated.icon,
+i.counterclockwise.rotated.icon {
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+/*-------------------
+Square
+--------------------*/
+
+i.square.icon {
+  width: 2em;
+  height: 2em;
+  padding: 0.5em 0.35em !important;
+  -webkit-box-shadow: 0em 0em 0em 0.1em rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0em 0em 0em 0.1em rgba(0, 0, 0, 0.1) inset;
+  vertical-align: baseline;
+}
+
+i.square.inverted.icon {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/*-------------------
+Inverted
+--------------------*/
+
+i.inverted.icon {
+  background-color: #222222;
+  color: #FFFFFF;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+body.blog {
+  border-top: 4px solid #00b5ad;
+  background: #f9f9f9;
+  background-color: #f9f9f9;
+}
+
+.blog h1.header.logo {
+  font-family: 'Open Sans';
+  font-size: 70px;
+  text-align: center;
+  margin: 70px 0;
+}
+
+.blog h1.header.logo a {
+  color: black;
+}
+
+.blog h1.header.logo:hover {
+  color: black;
+}
+
+.blog .page {
+  direction: rtl;
+}
+
+.blog .page .column {
+  text-align: right;
+}
+
+.blog h1,
+.blog h2,
+.blog h3,
+.blog h4,
+.blog h5,
+.blog h6 {
+  font-family: 'IRANSans', tahoma;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.blog h1 {
+  font-size: 1.6em;
+}
+
+.blog h2 {
+  font-size: 1.4em;
+}
+
+.blog h3 {
+  font-size: 1.2em;
+}
+
+.blog h4 {
+  font-size: 1.1em;
+}
+
+.blog h5 {
+  font-size: 1.05em;
+}
+
+.blog h6 {
+  font-size: 1.05em;
+}
+
+.blog .title {
+  margin-top: 0;
+}
+
+.blog p {
+  font-family: 'IRANSans', tahoma;
+}
+
+.blog p.date {
+  color: gray;
+  font-size: 1.2em;
+  line-height: 2em;
+}
+
+.blog .content {
+  font-family: 'IRANSans', tahoma;
+  margin-top: 1em;
+  line-height: 1.6em;
+  font-size: 1.4em;
+}
+
+.blog .content p {
+  text-indent: 1em;
+}
+
+.blog .content p+p {
+  margin-top: .5em;
+}
+
+.blog .content ul {
+  list-style-type: disc;
+  text-indent: 1em;
+  list-style-position: outside;
+  margin: 0 0 .75em;
+}
+
+.blog .content th {
+  text-align: right;
+}
+
+.blog span.en-txt {
+  font-family: 'Open Sans';
+}
+
+.blog code {
+  direction: ltr;
+  background-color: #ecf0f1;
+  color: #e74c3c;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: Inconsolata, Monaco, Consolas, "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  font-size: .7em;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
+.blog pre {
+  display: block;
+  margin: 0 auto 1em;
+  border-radius: 4px;
+  padding: 10px 15px;
+  background-color: #202020;
+  font-family: Inconsolata, Monaco, Consolas, "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  direction: ltr;
+  text-align: left;
+  font-size: .7em;
+  line-height: 1.8em;
+  overflow: auto;
+}
+
+.blog blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "“" "”" "‘" "’";
+}
+
+.blog blockquote:before {
+  color: #ccc;
+  content: "\2019\2019";
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.blog blockquote p {
+  display: inline;
+  color: #545454;
+}
+
+.blog .footer {
+  font-size: 1em;
+  padding: 7px;
+  margin: 60px 0 30px 0;
+  text-align: center;
+}
+
+.blog .footer .icons {
+  font-size: 2em;
+}
+
+.blog .footer p {
+  font-family: 'Open Sans';
+}
+
+.blog .footline {
+  background: linear-gradient(right, white 0%, #cccccc 50%, white 100%);
+  height: 1px;
+  margin: 2.5em 0;
+  background-image: #ddd;
+}
+
+.float-shadow {
+  display: inline-block;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+}
+
+.float-shadow:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+.float-shadow:hover {
+  -webkit-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
+
+.float-shadow:hover:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  -ms-transform: translateY(5px);
+  transform: translateY(5px);
+}

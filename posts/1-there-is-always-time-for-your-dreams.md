@@ -1,11 +1,11 @@
 extends: post.liquid
 
 title: همیشه زمان برای رسیدن به آرزوهاتون دارید
-date: 15 Aug 2014 07:22:45 +0330
+date: 15 Aug 2014 07:22:45 +0000
 route: blog
 ---
 
-> (نوشته‌ای از [David Heinemeier Hansson](http://twitter.com/dhh) در [Signal vs. Noise](http://37signals.com/svn/posts/1619-theres-always-time-to-launch-your-dream))
+{m:info}(نوشته‌ای از [David Heinemeier Hansson](http://twitter.com/dhh) در [Signal vs. Noise](http://37signals.com/svn/posts/1619-theres-always-time-to-launch-your-dream))
 
 «دوست داشتم یک شرکت بزنم / یک برنامه‌نویس عالی بشم / یک وبلاگ خفن بنویسم، ولی زمان کافی در روز ندارم!» چیز شعره. همیشه زمان کافی هست، شما فقط درست ازش استفاده نمی‌کنین.
 
