@@ -1,0 +1,219 @@
+/*
+ * CSS Reset
+*/
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block
+}
+
+body {
+  line-height: 1
+}
+
+ol,
+ul {
+  list-style: none
+}
+
+blockquote,
+q {
+  quotes: none
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+  content: '';
+  content: none
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+/*
+ * Fonts
+*/
+
+@font-face {
+  font-family: icomoon;
+  src: url(/assets/fonts/icomoon.eot?1fs6l1);
+  src: url(/assets/fonts/icomoon.eot?1fs6l1#iefix) format("embedded-opentype"), url(/assets/fonts/icomoon.ttf?1fs6l1) format("truetype"), url(/assets/fonts/icomoon.woff?1fs6l1) format("woff"), url(/assets/fonts/icomoon.svg?1fs6l1#icomoon) format("svg");
+  font-weight: 400;
+  font-style: normal
+}
+
+[class*=" icon-"],
+[class^=icon-] {
+  font-family: icomoon!important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.icon-twitter:before {
+  content: "\ea96"
+}
+
+.icon-github:before {
+  content: "\eab0"
+}
+
+.icon-linkedin:before {
+  content: "\eaca"
+}
+
+/*
+ * App Style
+*/
+
+body {
+  background-color: #00b5ad;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%239C92AC' fill-opacity='0.08' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+}
+
+a {
+  text-decoration: none
+}
+
+.container {
+  margin-top: 1.6rem;
+  font-family: 'Indie Flower', cursive;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center
+}
+
+header h1 {
+  font-size: 6rem
+}
+
+header .description {
+  font-size: 1.8rem
+}
+
+section.socials {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  margin-top: 3rem
+}
+
+section.socials i {
+  cursor: pointer;
+  color: rgba(255, 255, 255, .7);
+  transition: all .3s
+}
+
+section.socials i:hover {
+  color: #fff
+}

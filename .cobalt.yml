@@ -1,0 +1,5 @@
+source: ./
+dest: ./build
+ignore: ["README.md", "build/*", ".git/*"]
+name: Arash Mousavi
+link: http://routes.ir
