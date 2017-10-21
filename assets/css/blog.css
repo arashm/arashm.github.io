@@ -134,6 +134,10 @@ table {
   border-spacing: 0
 }
 
+/*
+ * Fonts
+*/
+
 @font-face {
   font-family: IRANSans;
   font-style: normal;
@@ -665,4 +669,37 @@ body.blog {
   -webkit-transform: translateY(5px);
   -ms-transform: translateY(5px);
   transform: translateY(5px);
+}
+
+/*
+ * Table
+*/
+
+table {
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+thead {
+  line-height: 1.5;
+  vertical-align: bottom;
+}
+
+tbody {
+  vertical-align: top;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  font-weight: 600;
+}
+
+th,
+td {
+  padding: .75em .75em .75em 0;
 }
