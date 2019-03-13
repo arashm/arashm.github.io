@@ -5,12 +5,12 @@ title: Arash Mousavi Persian Notes
 
 <div class='blog content'>
   <ul class="blog-list">
-    {% for post in collections.posts.pages %}
+    {% for page in collections.posts.pages %}
       <li>
         <div style='display: inline-block'>
           <a href="/{{ page.permalink }}">{{ page.title }}</a>
         </div>
-        <span>({{ page.published_data | date: "%b %d, %Y" }})</span>
+        {% comment %} <span>({{ page.published_date | date: "%b %d, %Y" }})</span> {% endcomment %}
       </li>
     {% endfor %}
   </ul>

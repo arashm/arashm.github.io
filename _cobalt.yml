@@ -1,4 +1,6 @@
 source: "."
+ignore:
+  - README.md
 template_extensions:
   - md
   - liquid
@@ -8,3 +10,5 @@ site:
     github_url: 'https://github.com/arashm'
     linkedin_url: 'https://www.linkedin.com/in/arashmousavi'
     twitter_url: 'https://twitter.com/TheAriaMo'
+posts:
+  dir: blog
