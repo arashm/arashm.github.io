@@ -1,18 +1,18 @@
 sudo: false
-language: rust
-cache: cargo
 before_script:
-- cargo install -f cobalt-bin --features="syntax-highlight"
-- export PATH="$PATH:/home/travis/.cargo/bin"
+- curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git cobalt-org/cobalt.rs
+  --crate cobalt --force --target x86_64-unknown-linux-gnu --tag v0.15.0
+- export PATH="$PATH:~/.cargo/bin"
 script:
 - cobalt build
-after_success: |
-  [ $TRAVIS_BRANCH = source ] &&
-  [ $TRAVIS_PULL_REQUEST = false ] &&
-  cobalt import --branch master &&
-  git config user.name "Arash Mousavi" &&
-  git config user.email "mousavi.arash@gmail.com" &&
-  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git master
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: build
+  target_branch: master
+  on:
+    branch: source
 env:
   global:
-    secure: 0gOlCIpxTCpaRW6TdWaVwlxI9fuIy438Q1LumDIuUlt7xEZOsHKvOY6fCjG2vNdL24TMLYqOEH8IJ8WtrztZwg+hzBnoqMGUu2tzeLO0R/D0lfxJL+uDOVHipMxoqHNf4Y8zuztWShh5BMaMNbIielFYuzHiQ41DCXtuSqSelDQM3lLMmlBUWxGWfHvAL4xRuKf1/7/JNEd9/QTFMLJ5RPoJ9yFBiQ/rnxwUOAFDNWc4RZxCugcBeH0zMlrpXPlKoc0KCBMoEHQSI01AIdbNFBot16MObspKS5kI61tYrHOwW4qKj+7sTudfodTEuW7JFpnEs+Xkdj72VBAIBYJcNzIloexABmkCbL43ejkgHlUm8yqJwGltjlFpO18oP1uWDX2tOULZJpqt9fDzrI5mbwcvqjz2kFwjvGVX1cT8HaK+7iIKwGfNgu8VK/enD2HURy3cNuV7sO0I9JdqiZa09atAo6Vx8ym800GDcq3CnaH4rOgxeo6hiWy9yhE21p6PrvI/exiUMN41mMl25U3w9oXYl3n7HMmw0KkRT2vs1DbvfvLJ4kNM4XTTOpEFpDm6bBfPXeCPThNWg8/vZDbaypIivzem70ymhv+toWoyKXX/dgqYEC+j7Rv9ldDtw7mlidJrIiEjyCIw7zmZTPLL0HOfn8vuViVp23m2HDivg5o=
+    secure: AvuDjodpLcBIu/YH7rRqSJySld3Ml4TaL44PpObkHWtQ9N+pGc6k3LjY7p555mjhKrwc5XwZaH+HNe/ClQ7LK2h3wC5Hdodq77ie7d6R7Gh5e2b3U8X/rcliZbNr/T9+2O/01ccY8xblSRAHC4PINiq0Ztfu6np+YG29yEHHtzyA/JNA7XV3U8K0VRybgd/A5qSJFeKW2l9Ur2Wnr4WcB4Q6O8jngUFFZOsy9W69XncK/skEIDU/PM8lq8/DPzs6z+Ww7p//p0a63VDNiYdzTFRb6A2ePgmdtNfbh9ghfrUamNhesBoqplyH3W5BPEGTeB/bLnxWQf8kMCTn3M1w1ilRX2yxFzXvY+UGGUipKWew7jWs5uyAwn6RHfxCxKNS/VphVd8hVBLviarQy/QRDlg09SaMtNq52ZuTnmOydCOLavfKpR90iFVwfDlRxULQceGaOAqsNkpgrdyZFSYr6iKfR5+1qJOGZQT+fIyjH+KLVBiA1Id0KUfsQc2jzb8MB2umfcuy4YkUATnbApQceNFPhoqp0dMJlNLoiVWK32ITkmDZ8JR4lMKihiWaBrmhe7JH1ahugOwzKt2SEuu1kzBdjRJQIHDzAI+781W9I6elQ/UoEJ7uiD2OMq7XD1jxjh9GOXcrFZLm3Lc0kJVr/2NfHnmm0NEhkVhrXKbdaIM=
