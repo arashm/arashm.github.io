@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: باسیلیسکِ روکو، عجیب‌ترین و خطرناک‌ترین ایده در وب
-date: 15 Aug 2014 07:23:48 +0000
-route: blog
+published_date: 2014-05-15 07:23:48 +0000
 ---
 
 {m:info}(نوشته‌ای از [Andrew Smales](http://twitter.com/bn2b) در [BN2B](http://www.bn2b.com/rokos-basilisk-is-one-of-the-weirdest-scariest-ideas-on-the-web/))

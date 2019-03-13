@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    {{ include "_layouts/_head.liquid" }}
+    {% include "head.liquid" %}
     <link rel="stylesheet" href="/assets/css/app.css">
   </head>
 
-  <body class='container' data-route={{ route }}>
-    {{ content }}
+  <body class='container' data-route={{ page.permalink }}>
+    {{ page.content }}
   </body>
 </html>

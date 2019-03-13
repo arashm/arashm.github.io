@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: همیشه زمان برای رسیدن به آرزوهاتون دارید
-date: 15 Aug 2014 07:22:45 +0000
-route: blog
+published_date: 2014-05-15 07:22:45 +0000
 ---
 
 {m:info}(نوشته‌ای از [David Heinemeier Hansson](http://twitter.com/dhh) در [Signal vs. Noise](http://37signals.com/svn/posts/1619-theres-always-time-to-launch-your-dream))

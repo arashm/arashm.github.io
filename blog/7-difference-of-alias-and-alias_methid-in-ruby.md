@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: تفاوت alias و alias_method در روبی
-date: 15 Aug 2014 07:25:41 +0000
-route: blog
+published_date: 2014-05-15 07:25:41 +0000
 ---
 
 تو روبی برای ایجاد نام مستعار برای متدها میشه از `alias` یا `alias_method` استفاده کرد. در نگاه اول ممکنه به نظر بیاد که این دو تا مثل هم هستن ولی در حقیقت یک تفاوت خیلی کوچک با هم دارن.

@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: Rails 4.1 ActiveRecord enums
-date: 15 Aug 2014 07:25:19 +0000
-route: blog
+published_date: 2014-05-15 07:25:19 +0000
 ---
 
 نسخه ۴.۱ ریلز به تازگی منتشر شده و امکانات جالب جدیدی داره. یکی از این امکانات ActiveRecord Enums هست، یک امکان خوب که ذخیره حالت‌های مختلف یک رکورد در مدل رو آسون میکنه.

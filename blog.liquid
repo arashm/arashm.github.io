@@ -1,19 +1,16 @@
-extends: posts.liquid
-
+---
+layout: posts.liquid
 title: Arash Mousavi Persian Notes
-route: blog
-path: /blog
 ---
 
-{{ include "_layouts/_variables.liquid" }}
 <div class='blog content'>
   <ul class="blog-list">
-    {% for post in posts %}
+    {% for post in collections.posts.pages %}
       <li>
         <div style='display: inline-block'>
-          <a href="/{{ post.path }}">{{ post.title }}</a>
+          <a href="/{{ page.permalink }}">{{ page.title }}</a>
         </div>
-        <span>({{ post.date | date: "%b %d, %Y" }})</span>
+        <span>({{ page.published_data | date: "%b %d, %Y" }})</span>
       </li>
     {% endfor %}
   </ul>

@@ -1,0 +1,10 @@
+source: "."
+template_extensions:
+  - md
+  - liquid
+destination: build
+site:
+  data:
+    github_url: 'https://github.com/arashm'
+    linkedin_url: 'https://www.linkedin.com/in/arashmousavi'
+    twitter_url: 'https://twitter.com/TheAriaMo'

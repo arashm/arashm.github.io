@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: گرفتن زیرشاخه‌های خاص از یک مخزن Git
-date: 15 Aug 2014 07:26:47 +0000
-route: blog
+published_date: 2014-05-15 07:26:47 +0000
 ---
 
 {m:info}(نوشته از [Jason Karns](http://jasonkarns.com/blog/author/jasonkarns/) در [Code Nomad](http://jasonkarns.com/blog/subdirectory-checkouts-with-git-sparse-checkout/))

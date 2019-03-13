@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: شروع کار با Gulp
-date: 15 Aug 2014 07:26:00 +0000
-route: blog
+published_date: 2014-05-15 07:26:00 +0000
 ---
 
 {m:info}(نوشته از [Mark Goodyear](http://twitter.com/markgdyr) از [اینجا](http://markgoodyear.com/2014/01/getting-started-with-gulp/))

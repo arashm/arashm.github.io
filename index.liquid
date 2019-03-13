@@ -1,9 +1,7 @@
-extends: default.liquid
-
-title: Arash Mousavi
-route: /
 ---
-{{ include "_layouts/_variables.liquid" }}
+layout: default.liquid
+title: Arash Mousavi
+---
 <div class='content'>
   <header>
     <h1>Arash Mousavi</h1>
@@ -16,15 +14,15 @@ route: /
   </header>
 
   <section class='socials'>
-    <a href={{twitter_url}} target="_blank" title='Twitter'>
+    <a href={{site.data.twitter_url}} target="_blank" title='Twitter'>
       <i class='icon-twitter'></i>
     </a>
 
-    <a href={{github_url}} target="_blank" title='Github'>
+    <a href={{site.data.github_url}} target="_blank" title='Github'>
       <i class='icon-github'></i>
     </a>
 
-    <a href={{linkedin_url}} target="_blank" title='Linkedin'>
+    <a href={{site.data.linkedin_url}} target="_blank" title='Linkedin'>
       <i class='icon-linkedin'></i>
     </a>
   </section>

@@ -1,8 +1,7 @@
-extends: post.liquid
-
+---
+layout: post.liquid
 title: چرا نباید از دکمه Snooze آلارم استفاده کرد
-date: 15 Aug 2014 07:25:02 +0000
-route: blog
+published_date: 2014-05-15 07:25:02 +0000
 ---
 
 تو ویدئو زیر به شکلی علمی توضیح میده که چرا نباید از امکان Snooze کردن آلارم استفاده کرد.

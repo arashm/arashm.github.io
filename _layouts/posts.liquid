@@ -1,19 +1,17 @@
-{{ include "_layouts/_variables.liquid" }}
-
 <!DOCTYPE html>
 <html>
   <head>
-    {{ include "_layouts/_head.liquid" }}
+    {% include "head.liquid" %}
     <link rel="stylesheet" href="/assets/css/blog.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
-  <body class='blog container' data-route={{ route }}>
-    {{ include "_layouts/_blog_header.liquid" }}
+  <body class='blog container' data-route={{ page.permalink }}>
+    {% include "blog_header.liquid" %}
 
     <div class='page'>
-      {{content}}
+      {{page.content}}
     </div>
 
-    {{ include "_layouts/_blog_footer.liquid" }}
+    {% include "blog_footer.liquid" %}
   </body>
 </html>
