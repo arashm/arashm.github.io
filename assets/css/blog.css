@@ -472,6 +472,10 @@ body.blog {
 
 .blog .page {
   direction: rtl;
+  margin: 0 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .blog .page .column {
@@ -529,23 +533,24 @@ body.blog {
 
 .blog .content {
   font-family: 'IRANSans', tahoma;
-  margin-top: 1em;
+  margin: 1em 0;
   line-height: 1.6em;
   font-size: 1.4em;
+  width: 90vw;
 }
 
 .blog .content p {
   text-indent: 1em;
 }
 
-.blog .content p+p {
+.blog .content p+p,
+.blog .content p+pre {
   margin-top: .5em;
 }
 
 .blog .content ul {
   list-style-type: disc;
-  text-indent: 1em;
-  list-style-position: outside;
+  list-style-position: inside;
   margin: 0 0 .75em;
 }
 
