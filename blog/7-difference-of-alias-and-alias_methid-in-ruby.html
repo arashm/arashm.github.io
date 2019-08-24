@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>تفاوت alias و alias_method در روبی</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/7-difference-of-alias-and-alias_methid-in-ruby.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>تفاوت alias و alias_method در روبی</h1>
+      <div class='content'>
+        <p>تو روبی برای ایجاد نام مستعار برای متدها میشه از <code>alias</code> یا <code>alias_method</code> استفاده کرد. در نگاه اول ممکنه به نظر بیاد که این دو تا مثل هم هستن ولی در حقیقت یک تفاوت خیلی کوچک با هم دارن.</p>
+<h2>کد برای alias:</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Test
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Arash</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">alias </span><span style="background-color:#2b303b;color:#a3be8c;">:sirname :name
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Test</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#96b5b4;">name </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Arash
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Test</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.sirname </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Arash
+</span></pre>
+<h2>کد برای alias_method:</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Test
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Arash</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">alias_method </span><span style="background-color:#2b303b;color:#a3be8c;">:sirname</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:name
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Test</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#96b5b4;">name </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Arash
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Test</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.sirname </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Arash
+</span></pre>
+<p>تا اینجا که چیز خیلی خاصی دیده نمیشه. فقط اینکه تو <code>alias</code> از کاما استفاده نمی‌کنیم. این رفتار عادی و مورد انتظار از <code>alias</code> و <code>alias_method</code> است. در این موارد <code>name</code> و <code>sirname</code> هر دو خروجی یکسان دارن. اما اگه یک کلاس زیرمجموعه از <code>Test</code> درست کنیم چی؟</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Test
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Arash</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#bf616a;">self</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">do_rename
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">alias </span><span style="background-color:#2b303b;color:#a3be8c;">:sirname :name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Example </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">Test
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Ernie</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">do_rename
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Example</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#96b5b4;">name </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Ernie
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Example</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.sirname </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Arash
+</span></pre>
+<p>اینجا <code>sirname</code> به کلاس والد اشاره می‌کنه. <code>alisa</code> زمانی که کد parse میشه مقداردهی میشه. موقع اجرای <code>Test</code> متد <code>sirname</code> با مقدار <code>name</code> پر میشه و این برای تمام کلاس‌های گرفته شده از <code>Test</code> هم درسته.</p>
+<p>در طرف مقابل <code>alias_method</code> در همون حوزه‌ی <code>self</code> مقداردهی میشه:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Test
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Arash</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#bf616a;">self</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">do_rename
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">alias_method </span><span style="background-color:#2b303b;color:#a3be8c;">:sirname</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Example </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">Test
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">name
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Ernie</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">do_rename
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Example</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#96b5b4;">name </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Ernie
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Example</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.sirname </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; Ernie
+</span></pre>
+<p>توضیح خاص دیگه فکر نکنم بخواد. کاملا روشن‌ه :)</p>
+
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>گرفتن زیرشاخه‌های خاص از یک مخزن Git</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/9-getting-subdirectories-out-of-a-git-repository.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>گرفتن زیرشاخه‌های خاص از یک مخزن Git</h1>
+      <div class='content'>
+        <p>{m:info}(نوشته از <a href="http://jasonkarns.com/blog/author/jasonkarns/">Jason Karns</a> در <a href="http://jasonkarns.com/blog/subdirectory-checkouts-with-git-sparse-checkout/">Code Nomad</a>)</p>
+<p>ممکنه یک زمانی بخواهید از یک مخزن Git فقط یک قسمت/پوشه خاص رو دریافت کنین و آپدیت نگه‌اش دارین. برای اینکار باید از امکان spare-checkout گیت استفاده کنید.</p>
+<h2>مخزن جدید</h2>
+<p>برای اینکه بشه از این امکان استفاده کرد، باید تو تنظیمات مخزن گیت <code>core.sparecheckout</code> مقدار <code>true</code> تظیم بشه. برای اینکار هم لازمه‌اش اینه که مخزن از قبل وجود داشته باشه. پس به جای اینکه <code>git clone</code> کرد، باید <code>git init</code> انجام داد.</p>
+<p>مخزن جدید رو بسازید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">mkdir &lt;repo&gt; &amp;&amp; cd &lt;repo&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">git init
+</span><span style="background-color:#2b303b;color:#c0c5ce;">git remote add –f &lt;name&gt; &lt;url&gt;
+</span></pre>
+<p>امکان spare-checkout رو فعال کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">git config core.sparsecheckout true
+</span></pre>
+<p>زیر شاخه‌هایی که میخواین رو در <code>.git/info/spare-checkout</code> اضافه کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">echo some/dir/ &gt;&gt; .git/info/sparse-checkout
+</span><span style="background-color:#2b303b;color:#c0c5ce;">echo another/sub/tree &gt;&gt; .git/info/sparse-checkout
+</span></pre>
+<p>حالا مخزن رو از سرور <code>pull</code> کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">git pull &lt;remote&gt; &lt;branch&gt;
+</span></pre>
+<h2>مخزن موجود</h2>
+<p>اگر از قبل یک مخزن دارید و میخواید spare-checkout استفاده کنید، مثل مورد بالا spare-checkout رو فعال کنین و بعد هم <code>git read-tree</code> رو انجام بدین:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">git config core.sparsecheckout true
+</span></pre>
+<p>اضافه کردن شاخه‌های مورد نیاز به <code>.git/info/spare-checkout</code> :</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">echo some/dir/ &gt;&gt; .git/info/sparse-checkout
+</span><span style="background-color:#2b303b;color:#c0c5ce;">echo another/sub/tree &gt;&gt; .git/info/sparse-checkout
+</span></pre>
+<p>مخزن رو آپدیت کنین:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">git read-tree -mu HEAD
+</span></pre>
+<h2>تغییر زیرشاخه‌های انتخاب شده</h2>
+<p>اگر بعداً تصمیم گرفتین که زیرشاخه‌هایی که انتخاب کردین رو تغییر بدین، خیلی راحت پرونده spare-checkout رو تغییر بدین و بعد هم <code>git read-tree</code> رو دوباره اجرا کنین.</p>
+<p><a href="http://git-scm.com/docs/git-read-tree">مستندات مربوط به sub-tree/spare-checkout</a> رو بخونید. پرونده spare-tree از الگوها هم پشتیبانی می‌کنه، دقیقا مثل gitignore. از لیست سیاه هم پشتیبانی میشه - میتونید انتخاب کنید که چه شاخه‌ها یا پرونده‌های <code>checkout</code> نشن.</p>
+
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>

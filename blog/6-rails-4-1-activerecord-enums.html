@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Rails 4.1 ActiveRecord enums</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/6-rails-4-1-activerecord-enums.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>Rails 4.1 ActiveRecord enums</h1>
+      <div class='content'>
+        <p>نسخه ۴.۱ ریلز به تازگی منتشر شده و امکانات جالب جدیدی داره. یکی از این امکانات ActiveRecord Enums هست، یک امکان خوب که ذخیره حالت‌های مختلف یک رکورد در مدل رو آسون میکنه.</p>
+<p>مثلا فرض کنید که در برنامه‌تون یک مدل <code>User</code> دارین و هر کدوم از این کاربرها می‌تونین یک وضعیت به عنوان‌های <code>registered</code> و <code>active</code> یا <code>blocked</code> داشته باشن.</p>
+<p>تو نسخه‌های قبلی اگر میخواستین این کار رو بکنید، احتمالا یک فیلد متنی یا عددی به دیتابیس اضافه می‌کردین و بعد هم چندتا <code>scope</code> توی مدل میذاشتین تا از جدول اطلاعات رو بگیرید. حالا همه چیز ساده‌تر شده. فقط لازمه که یک <code>migration</code> بنویسید و فقط فیلد لازم رو به جدول اضافه کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">AddStatus </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">ActiveRecord::Migration
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">change
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">add_column </span><span style="background-color:#2b303b;color:#a3be8c;">:users</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:state</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:integer
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span></pre>
+<p>و بعد هم ماکرو <code>enum</code> رو به کلاس <code>User</code> اضافه کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">User
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">enum </span><span style="background-color:#2b303b;color:#a3be8c;">state: </span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#a3be8c;">:registered</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:active</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:blocked</span><span style="background-color:#2b303b;color:#c0c5ce;">]
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span></pre>
+<p>به صورت پیش‌فرض وضعیت کاربر <code>nil</code> خواهد بود. ما می‌تونیم با اسم هر وضعیت یک کوئری بگیریم:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">user = </span><span style="background-color:#2b303b;color:#ebcb8b;">User</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.state
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; nil
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.registered?
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; false
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.state = </span><span style="background-color:#2b303b;color:#a3be8c;">:registered
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.registered?
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; true
+</span></pre>
+<p>می‌تونیم مستقیما وضعیت کاربر رو بروزرسانی و ذخیره کنیم:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">user.registered!
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.persisted?
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; true
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.registered?
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; true
+</span></pre>
+<p>همینطور به طور خودکار یک <code>scope</code> هم برای هر وضعیت داریم:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#ebcb8b;">User</span><span style="background-color:#2b303b;color:#c0c5ce;">.active
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; #&lt;ActiveRecord::Relation []&gt;
+</span><span style="background-color:#2b303b;color:#ebcb8b;">User</span><span style="background-color:#2b303b;color:#c0c5ce;">.registered
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; #&lt;ActiveRecord::Relation [#&lt;User id: 7, status: 0...]&gt;
+</span></pre>
+<p>حتی می‌تونیم به شکل مستقیم یک کاربر با وضعیتی که میخوایم بسازیم:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#ebcb8b;">User</span><span style="background-color:#2b303b;color:#c0c5ce;">.registered.create
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; #&lt;User id: 6, status: 1, ...&gt;
+</span></pre>
+<p>ActiveRecord برای ذخیره وضعیت‌ها توی فیلد دیتابیس از عدد استفاده میکنه. اگر لازم باشه که یک وضعیت پیش‌فرض برای کاربر داشته باشیم (ینی کاربری که ساخته میشه مثلا وضعیت <code>active</code> داشته باشه و نه <code>nil</code>) میتونیم توی migration از کلید <code>default</code> استفاده کنیم:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">ChangeStatus </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">ActiveRecord::Migration
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">change
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">change_column </span><span style="background-color:#2b303b;color:#a3be8c;">:users</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:status</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">:integer</span><span style="background-color:#2b303b;color:#c0c5ce;">, </span><span style="background-color:#2b303b;color:#a3be8c;">default: </span><span style="background-color:#2b303b;color:#d08770;">1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span></pre>
+<p>از الان به بعد تمام کاربرهای جدیدی که ساخته میشن وضعیت پیش‌فرض active رو خواهند داشت:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">user = </span><span style="background-color:#2b303b;color:#ebcb8b;">User</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user.state
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; &quot;active&quot;
+</span></pre>
+<p>توجه داشته باشین که برای اسم وضعیت‌ها از اسم‌های ستون‌های موجود در پایگاه داده یا متدهایی که قبلا استفاده کردین و یا کلیدهایی که مختص ریلز هست، استفاده نکنید. اگر اشتباها اینکار رو بکنید، ریلز خطا میده:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">User
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">enum </span><span style="background-color:#2b303b;color:#a3be8c;">state: </span><span style="background-color:#2b303b;color:#c0c5ce;">[</span><span style="background-color:#2b303b;color:#a3be8c;">:logger</span><span style="background-color:#2b303b;color:#c0c5ce;">]
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; ArgumentError: You tried to define an enum named &quot;state&quot; on the model &quot;User&quot;,
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># but this will generate a class method &quot;logger&quot;, 
+</span><span style="background-color:#2b303b;color:#c0c5ce;"> </span><span style="background-color:#2b303b;color:#65737e;"># which is already defined by Active Record.
+</span></pre>
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>

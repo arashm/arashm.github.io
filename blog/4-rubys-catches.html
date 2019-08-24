@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>گیرهای روبی</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/4-rubys-catches.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>گیرهای روبی</h1>
+      <div class='content'>
+        <p>خیلی از تازه‌کارهای Ruby on Rails شیفته‌ی کار کردن با این فریم‌ورک قدرتمند میشن و بدون اطلاع دقیق از زبان روبی شروع به ساخت برنامه‌هاشون باهاش میکنن. و البته که هیچ اشکالی تو این قضیه نیست. مگر اینکه این تازه‌کارها روی روش‌هاشون پافشاری کنن و تبدیل به یک توسعه‌دهنده ارشد بشن، بدون اینکه بازم از زبان روبی اطلاعی داشته باشن.</p>
+<p>به‌هرحال، دیر یا زود، تازه‌کارها یا توسعه‌دهنده‌های باتجربه، هر دو به گیرهای روبی برخورد میکنن. پیچیدگی‌های خیلی کوچیکی که توی زبان مخفی هستن و ساعت‌ها دیباگ طاقت‌فرسا آخرش منتهی به «مشکل همین بود؟!!» میشه.</p>
+<p>اینجا یک لیست از این گیرهای کوچیک روبی رو گذاشتم که توسعه دهنده‌های روبی باید ازشون مطلع باشن. برای هر مورد یک مثال و راهکار قرار دادم.</p>
+<h2><code>and/or</code> مثل <code>&amp;&amp;/||</code> نیستند</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">surprise = </span><span style="background-color:#2b303b;color:#d08770;">true </span><span style="background-color:#2b303b;color:#c0c5ce;">and </span><span style="background-color:#2b303b;color:#d08770;">false </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; surprise is true
+</span><span style="background-color:#2b303b;color:#c0c5ce;">surprise = </span><span style="background-color:#2b303b;color:#d08770;">true </span><span style="background-color:#2b303b;color:#c0c5ce;">&amp;&amp; </span><span style="background-color:#2b303b;color:#d08770;">false  </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; surprise is false
+</span></pre>
+<h3>عادت خوب</h3>
+<p>همیشه از <code>&amp;&amp;/||</code> استفاده کنید.</p>
+<h3>جزئیات</h3>
+<ul>
+<li><code>and/or</code> نسبت به <code>&amp;&amp;/||</code> الویت کمتری دارن</li>
+<li><code>and/or</code> نسبت به <code>=</code> الویت کمتری دارن ولی <code>&amp;&amp;/||</code> الویت بالاتری دارن</li>
+<li><code>and</code> و <code>or</code> هر دو الویت یکسان دارن، درصورتی که <code>&amp;&amp;</code>  الویت بالاتری نسبت به <code>||</code> داره</li>
+</ul>
+<p>میتونیم مثال اول رو با گذاشتن پرانتز روشن‌تر کنیم، که نشون خواهد داد چطور استفاده از <code>and</code> از <code>&amp;&amp;</code> متفاوت هست:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">(surprise = </span><span style="background-color:#2b303b;color:#d08770;">true</span><span style="background-color:#2b303b;color:#c0c5ce;">) and </span><span style="background-color:#2b303b;color:#d08770;">false </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; surprise is true
+</span><span style="background-color:#2b303b;color:#c0c5ce;">surprise = (</span><span style="background-color:#2b303b;color:#d08770;">true </span><span style="background-color:#2b303b;color:#c0c5ce;">&amp;&amp; </span><span style="background-color:#2b303b;color:#d08770;">false</span><span style="background-color:#2b303b;color:#c0c5ce;">)  </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; surprise is false
+</span></pre>
+<h2><code>eql?</code> مثل <code>==</code> نیست (حتی مشابه <code>equal?</code> و <code>===</code> هم نیست)</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#d08770;">1 </span><span style="background-color:#2b303b;color:#c0c5ce;">== </span><span style="background-color:#2b303b;color:#d08770;">1.0   </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; true
+</span><span style="background-color:#2b303b;color:#d08770;">1</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#96b5b4;">eql? </span><span style="background-color:#2b303b;color:#d08770;">1.0 </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; false
+</span></pre>
+<h3>عادت خوب</h3>
+<p>فقط از <code>==</code> استفاده کنید</p>
+<h3>جزئیات</h3>
+<p><code>==</code>، <code>===</code>، <code>eql?</code> و <code>equal?</code> رفتارهای متفاوتی دارن، که برای شرایط و استفاده متفاوت بکار میرن. برای مقایسه‌ی چیزها باید همیشه از <code>==</code> استفاده کنین، مگر اینکه واقعا احتیاج به موارد خاصی داشته باشین (مثل اینکه بخواین واقعا بین <code>1.0</code> و <code>1</code> تفاوت بزارین) یا اینکه هر کدوم از اینها رو بیاین بازنویسی کنین.</p>
+<p>بله، <code>eql?</code> هوشمندتر از <code>==</code> عمل میکنه، ولی آیا این واقعا اون چیزی هست که بهش احتیاج دارین؟</p>
+<h2><code>super</code> مشابه <code>super()</code> نیست</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Foo
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">show
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Foo#show</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Bar </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">Foo
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">show</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#bf616a;">text</span><span style="background-color:#2b303b;color:#c0c5ce;">)
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">super
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts</span><span style="background-color:#2b303b;color:#c0c5ce;"> text
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Bar</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.show(&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">test</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;) </span><span style="background-color:#2b303b;color:#65737e;"># ArgumentError: wrong number of arguments (1 for 0)
+</span></pre>
+<h3>عادت خوب</h3>
+<p>این یکی، یکی از مواردی هست که برداشتن پرانتزها نه تنها سلیقه‌ای نیست، بلکه منطق برنامه رو عوض میکنه.</p>
+<h3>جزئیات</h3>
+<ul>
+<li><code>super</code> (بدون پرانتز) متد والد رو با دقیقا همون متغیرهایی که به متد اصلی ارسال شدن صدا میزنه (بنابراین <code>super</code> در <code>Bar#show</code> تبدیل میشه به <code>super('test')</code> که اینجا باعث خطا میشه چون متد والد هیچ متغیری رو نمی‌پذیره)</li>
+<li><code>super()</code> (با پرانتز) متد والد رو بدون هیچ متغیری صدا میزنه</li>
+</ul>
+<h2>exceptionهای شما نباید <code>Exception</code> باشند</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">MyException </span><span style="background-color:#2b303b;color:#eff1f5;">&lt; </span><span style="background-color:#2b303b;color:#a3be8c;">Exception
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">begin
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">raise </span><span style="background-color:#2b303b;color:#bf616a;">MyException
+</span><span style="background-color:#2b303b;color:#b48ead;">rescue
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Caught it!</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#65737e;"># MyException: MyException
+</span><span style="background-color:#2b303b;color:#65737e;">#       from (irb):17
+</span><span style="background-color:#2b303b;color:#65737e;">#       from /Users/karol/.rbenv/versions/2.1.0/bin/irb:11:in `&lt;main&gt;&#39;
+</span></pre>
+<p>(در این کد عبارت <code>rescue</code> برای <code>MyException</code> هیچ‌وقت اجرا نمی‌شود و پیام <code>'Caught it!'</code> هم نمایش داده نخواهد شد)</p>
+<h3>عادت خوب</h3>
+<ul>
+<li>وقتی که کلاس exception خودتون رو تعریف می‌کنید، از <code>StandardError</code> یا هر کدوم از نوادگانش :))) (descendants) ارث‌بری کنید. هیچ‌وقت از <code>Exception</code> استفاده نکنید</li>
+<li>هیچ‌وقت از <code>rescue Exception</code> استفاده نکنید. اگر میخواید یک rescue کلی انجام بدید، عبارت rescue رو خالی بزارین (یا اینکه از <code>rescue =&gt; e</code> استفاده کنید)</li>
+</ul>
+<h3>جزئیات</h3>
+<ul>
+<li>وقتی عبارت <code>rescue</code> رو خالی میزارین، ینی اینکه exceptionهایی که از <code>StandardError</code> ارث‌بری کرده‌اند گرفته میشن و نه <code>Exception</code></li>
+<li>اگر از <code>rescue Exception</code> استفاده کنین (که نباید بکنید)، شما خطاهایی رو catch می‌کنید که نمی‌تونید کاری براش بکنید (مثل خطای out of memory). همینطور سیگنال‌هایی مثل SIGTERM رو هم گیر میندازین که باعث میشه نتونید اسکریپت رو با CTRL-C متوقف کرد.</li>
+</ul>
+<h2><code>class Foo::Bar</code> مثل <code>module Foo; class Bar</code> نیست</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">MY_SCOPE = &#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Global</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">module </span><span style="background-color:#2b303b;color:#c0c5ce;">Foo
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#c0c5ce;">MY_SCOPE = &#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Foo Module</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Bar
+</span><span style="background-color:#2b303b;color:#eff1f5;">    </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">scope1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#bf616a;">MY_SCOPE
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Foo::Bar
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">scope2
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#bf616a;">MY_SCOPE
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">::</span><span style="background-color:#2b303b;color:#ebcb8b;">Bar</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.scope1 </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; &quot;Foo Module&quot;
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">::</span><span style="background-color:#2b303b;color:#ebcb8b;">Bar</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">new</span><span style="background-color:#2b303b;color:#c0c5ce;">.scope2 </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; &quot;Global&quot;
+</span></pre>
+<h3>عادت خوب</h3>
+<p>همیشه از نسخه طولانی‌تر و با جزئیات بیشتر استفاده کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">module </span><span style="background-color:#2b303b;color:#c0c5ce;">Foo
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Bar
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span></pre>
+<h3>جزئیات</h3>
+<ul>
+<li>کلیدواژه‌ی <code>module</code> (در کنار <code>class</code> و <code>def</code>) یک scope جدید تعریف میکنن. بنابراین، <code>module Foo</code> یک scope جدید <code>Foo</code> ایجاد میکنه که مقدار ثابت <code>MY_SCOPE</code> با مقدار <code>'Foo Module'</code> درش هست</li>
+<li>داخل این module ما یک کلاس <code>class Bar</code> تعریف کردیم، که یک scope جدید به نام <code>'Foo::Bar'</code> ایجاد میکنه، که دسترسی به scope والد (<code>'Foo'</code>) و تمام ثابت‌هایی که درش تعریف شدن داره</li>
+<li>وقتی شما Foo::Bar رو با میان‌بر <code>::</code> تعریف می‌کنین: <code>class Foo::Bar</code>، یک scope جدید ساخته میشه، که باز هم <code>Foo::Bar</code> نام داره، ولی اینجا دیگه والدی نداره، بنابراین دسترسی‌ای به scope با نام <code>Foo</code> نداره</li>
+<li>بنابراین در داخل <code>class Foo::Bar</code> ما فقط دسترسی به ثابت <code>MY_SCOPE</code> داریم که در ابتدای اسکریپت با مقدار <code>Global</code> تعریف شده</li>
+</ul>
+<h2>اکثر متدهای <code>bang!</code> وقتی کاری نمی‌کنن مقدار <code>nil</code> بر می‌گردونن</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">foo</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;.upcase! </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; &quot;FOO&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">FOO</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;.upcase! </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; nil
+</span></pre>
+<h3>عادت خوب</h3>
+<p>هیچ‌وقت به خروجی متدهای <code>bang!</code> پیش‌ساخته وابسته نباشین مثلا:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">@</span><span style="background-color:#2b303b;color:#bf616a;">name</span><span style="background-color:#2b303b;color:#c0c5ce;">.upcase! and render </span><span style="background-color:#2b303b;color:#a3be8c;">:show
+</span></pre>
+<p>کد بالا میتونه یکسری رفتارهای غیرمنتظره ازش سر بزنه (یا اینکه یک رفتار کاملا قابل انتظار وقتی که <code>@name</code> از قبل uppercase باشه). همینطور این یک مثال دیگه‌اس که نباید از <code>and/or</code> استفاده کنین. هیچ درختی قطع نخواهد شد اگر این دو خط رو اضافه کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">@</span><span style="background-color:#2b303b;color:#bf616a;">name</span><span style="background-color:#2b303b;color:#c0c5ce;">.upcase!
+</span><span style="background-color:#2b303b;color:#c0c5ce;">render </span><span style="background-color:#2b303b;color:#a3be8c;">:show
+</span></pre>
+<h2>متدهای <code>attribute=(value)</code> همیشه مقدار ارسال شده رو به عنوان خروجی برمی‌گردونن</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Foo
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#bf616a;">self</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">bar=</span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#bf616a;">value</span><span style="background-color:#2b303b;color:#c0c5ce;">)
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">@</span><span style="background-color:#2b303b;color:#bf616a;">foo </span><span style="background-color:#2b303b;color:#c0c5ce;">= value
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">return </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">OK</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">.bar = </span><span style="background-color:#2b303b;color:#d08770;">3 </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; 3
+</span></pre>
+<p>دقت کنید که این متد <code>bar=</code> مقدار <code>3</code> رو برمی‌گردونه با اینکه به مشخصا <code>return 'OK'</code> رو استفاده کردیم.</p>
+<h3>عادت خوب</h3>
+<p>هیچ‌وقت بر اتفاقاتی که در این نوع متدها میافته وابسته نباشید. برای مثال در عبارت‌های شرطی مثل این:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Assigned</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39; </span><span style="background-color:#2b303b;color:#b48ead;">if </span><span style="background-color:#2b303b;color:#c0c5ce;">(</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">.bar = </span><span style="background-color:#2b303b;color:#d08770;">3</span><span style="background-color:#2b303b;color:#c0c5ce;">) == &#39;</span><span style="background-color:#2b303b;color:#a3be8c;">OK</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39; </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; nil
+</span></pre>
+<p>مشخصا این کار نخوهد کرد.</p>
+<h2><code>private</code> متدهای <code>self.method</code> رو private نخواهد کرد</h2>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Foo
+</span><span style="background-color:#2b303b;color:#eff1f5;">
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#8fa1b3;">private
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#bf616a;">self</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">bar
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Not-so-private class method called</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">.bar </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; &quot;Not-so-private class method called&quot;
+</span></pre>
+<p>دقت کنید اگه private بود عبارت <code>Foo.bar</code> خطای <code>NoMethodError</code> بر می‌گردوند.</p>
+<h3>عادت خوب</h3>
+<p>برای اینکه متدهای کلاس‌تون رو private کنید باید از <code>private_class_method :method_name</code> استفاده کنین یا اینکه متدهای private رو درون <code>class &lt;&lt; self</code> بزارین:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#ebcb8b;">Foo
+</span><span style="background-color:#2b303b;color:#eff1f5;">
+</span><span style="background-color:#2b303b;color:#eff1f5;">  </span><span style="background-color:#2b303b;color:#b48ead;">class </span><span style="background-color:#2b303b;color:#c0c5ce;">&lt;&lt; </span><span style="background-color:#2b303b;color:#bf616a;">self
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#8fa1b3;">private
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#8fa1b3;">bar
+</span><span style="background-color:#2b303b;color:#c0c5ce;">      </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Class method called</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">def </span><span style="background-color:#2b303b;color:#bf616a;">self</span><span style="background-color:#2b303b;color:#c0c5ce;">.</span><span style="background-color:#2b303b;color:#8fa1b3;">baz
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#96b5b4;">puts </span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;</span><span style="background-color:#2b303b;color:#a3be8c;">Another class method called</span><span style="background-color:#2b303b;color:#c0c5ce;">&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">  </span><span style="background-color:#2b303b;color:#96b5b4;">private_class_method </span><span style="background-color:#2b303b;color:#a3be8c;">:baz
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#b48ead;">end
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">.bar </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; NoMethodError: private method `bar&#39; called for Foo:Class
+</span><span style="background-color:#2b303b;color:#ebcb8b;">Foo</span><span style="background-color:#2b303b;color:#c0c5ce;">.baz </span><span style="background-color:#2b303b;color:#65737e;"># =&gt; NoMethodError: private method `baz&#39; called for Foo:Class
+</span></pre>
+<h2>پایان</h2>
+<p>فهرست بالا در ابتدا شاید چیز خاصی به نظر نیاد، ولی بعدا میاد خرتون رو میگیره. پس بهتره که در موردشون اطلاع داشته باشین. اطلاع داشتن در مورد اینها، ساعت‌ها وقت شما رو برای دیباگ کردن کدها زنده می‌کنه و از سردردهای آتی می‌کاهد :D</p>
+<p>(<a href="http://blog.elpassion.com/ruby-gotchas/">منبع</a>)</p>
+
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>

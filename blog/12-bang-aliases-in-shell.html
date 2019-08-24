@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>میانبرهای کمکی تاریخچه در Shell</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/12-bang-aliases-in-shell.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>میانبرهای کمکی تاریخچه در Shell</h1>
+      <div class='content'>
+        <p>یکسری متغیرها و میانبرها در shell لینوکس هست که کار کردن باهاش رو خیلی ساده‌تر و باحال‌تر میکنه. این میانبرها همه با <code>!</code> شروع میشن. یکسری از پرکاربردترین‌هاش رو اینجا میزارم.</p>
+<h2>متغیرهای کمکی</h2>
+<p>فرض کنید دستور قبلی که در ترمینال زدیم دستور <code>du -h directory/example.rb</code> بوده. با توجه به این دستور، یک مثال نوشتم و خروجی هر کدوم از متغیرهای کمکی در جدول زیر نمایش داده شده:</p>
+<table><thead><tr><th>متغیر </th><th> توضیحات </th><th> نمونه </th><th align="left"> خروجی</th></tr></thead><tbody>
+<tr><td><code>!!</code> </td><td> فراخوانی دستور قبل </td><td> <code>sudo !!</code> </td><td align="left"> <code>sudo du -h directory/example.rb</code></td></tr>
+<tr><td><code>!*</code> </td><td> هر چیزی غیر از نام دستور قبل </td><td> - </td><td align="left"> <code>-h directory/example.rb</code></td></tr>
+<tr><td><code>!:n</code> </td><td> جدا کردن قسمت n ام </td><td> <code>!:1</code> </td><td align="left"> <code>-h</code></td></tr>
+<tr><td><code>!$</code> یا <code>$_</code> </td><td> آخرین قسمت دستور قبل، معمولا path </td><td> <code>!$</code> </td><td align="left"> <code>directory/example.rb</code></td></tr>
+<tr><td><code>!$:h</code> </td><td> قسمت اول path دستور قبل </td><td> <code>!$:h</code> </td><td align="left"> <code>directory</code></td></tr>
+<tr><td><code>!$:t</code> </td><td> قسمت آخر path دستور  قبل </td><td> <code>!$:t</code> </td><td align="left"> <code>example.rb</code></td></tr>
+<tr><td><code>!$:r</code> </td><td> path بدون پسوند پرونده </td><td> <code>!$:r</code> </td><td align="left"> <code>directory/example</code></td></tr>
+<tr><td><code>!$:t:r</code> </td><td> قسمت آخر path بدون پسوند پرونده </td><td> <code>!$:t:r</code> </td><td align="left"> <code>example</code></td></tr>
+<tr><td><code>!$:t:e</code> </td><td> نمایش فقط پسوند </td><td> <code>!$:t:e</code> </td><td align="left"> <code>rb</code></td></tr>
+</tbody></table>
+<p>نکته: یک توضیح در مورد دستورهایی که با <code>!$</code> شروع میشن: می‌تونید به جای <code>!$</code> از <code>!:n</code> استفاده کنید. مثلا در دستور نمونه ما path در قسمت دوم است. پس تمامی موارد بالا با <code>!:2</code> هم کار میکنه. همیشه ممکنه path آخرین قسمت دستور نباشه! :)</p>
+<h3>کجا استفاده میشن؟</h3>
+<p>معمولا وقتی در دستور بعدی میخواهید به دستور قبلی ارجاع کنین و نمی‌خواید همه چیز رو دوباره تایپ کنید. مثلا اگر یادتون میره جلوی دستور بزنید sudo می‌تونید تو دستور بعد به جای تایپ کردن همه چیز فقط بنویسین <code>sudo !!</code>. یا اینکه در دستور بعد میخواین pathای که در دستور قبلی دادید رو دوباره استفاده کنید، یک راه‌اش اینه که کپی کنید و راه دیگه اینه که مثلا <code>vim $_</code>. راحت‌تر نیست؟</p>
+<h3>تفاوت Bash و Zsh</h3>
+<p>تنها تفاوت اینه که Bash بلافاصله دستور رو اجرا میکنه ولی Zsh دستور رو فقط نمایش میده. برای اینکه Bash هم خودش اجرا نکنه از <code>:p</code> استفاده کنید تا فقط نمایش داده بشه. مثلا: <code>sudo !!:p</code>. در کل اگه Bash استفاده می‌کنید برید زودتر Zsh استفاده کنید :D</p>
+<h2>اصلاح دستور قبل</h2>
+<p>فرض کنید در یک دستور غلط املایی دارین. مثلا <code>du -h examlpe.rb</code>. برای اصلاح‌اش کافیه دستور زیر رو بزنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">^examlpe^example
+</span></pre>
+<p>shell دستور اصلاح شده رو نمایش میده.</p>
+
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>

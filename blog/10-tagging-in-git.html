@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>تگ کردن در Git</title>
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body class='blog container' data-route=blog/10-tagging-in-git.html>
+    <div class='blog'>
+  <h1 class='header logo'>
+    ROUTES
+  </h1>
+</div>
+
+<div class='ui horizontal icon divider'>
+  <i class='fa fa-angle-double-down circular icon'></i>
+</div>
+
+
+    <div class='page'>
+      <h1 class='title'>تگ کردن در Git</h1>
+      <div class='content'>
+        <p>مثل خیلی از سیستم‌های مدیریت نسخه‌ی دیگه، گیت هم قابلیت تگ کردن و مشخص کردن یک قسمت مهم از تاریخچه نرم‌افزار رو داره. افراد از این امکان معمولا برای مشخص کردن انتشارها (<code>v1.0</code> و...) استفاده میکنن. تو این پست لیست کردن تگ‌ها، ساختن تگ‌ها و انواع تگ‌های مختلف رو نشون میدم.</p>
+<h2>لیست کردن تگ‌ها</h2>
+<p>برای لیست کردن تگ‌ها از دستور <code>git tag</code> استفاده کنین:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git tag
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v0.1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.3
+</span></pre>
+<p>این دستور تگ‌ها رو به ترتیب حروف الفبا نشون میده و ترتیب نمایش اونها ارتباطی به اهمیت‌شون نداره.</p>
+<p>شما همینطور می‌تونین تگ‌ها رو براساس الگویی خاص فهرست کنید. مثلا در مخزنی که شامل ۲۴۰ تا تگ میشه و شما فقط به تگ‌های مربوط به نسخه 1.4.2 اهمیت میدین، میتونید دستور زیر رو بزنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git tag -l &#39;v1.4.2.*&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4.2.1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4.2.2
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4.2.3
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4.2.4
+</span></pre>
+<h2>ساخت تگ</h2>
+<p>در گیت دو نوع تگ کردن وجود داره: lightweight و annotated. تگ lightweight دقیقا مثل یک شاخه هست که تغییری نمیکنه - فقط یک نشانگر هست به یک کامیت خاص. ولی تگ‌های annotated یک آبجکت کامل رو در بانک‌اطلاعاتی گیت ذخیره میکنن. اونها checksum دارن، اسم، ایمیل تگ کننده رو نشون میدن و تاریخ هم دارن و میتونن با <a href="http://fa.wikipedia.org/wiki/GPG">GPG</a> هم امضا بشن. به طور معمول توصیه میشه که از تگ‌های annotated استفاده کنید چون حاوی تمام اطلاعات هستن.</p>
+<h3>تگ‌های Annotated</h3>
+<p>ساخت تگ‌های annotated ساده است. از کلید <code>-a</code> با فرمان <code>tag</code> استفاده کنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git tag -a v1.4 -m &#39;my version 1.4&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">$ git tag
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v0.1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.3
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4
+</span></pre>
+<p>کلید <code>-m</code> پیام تگ رو مشخص میکنه. اگر این کلید رو استفاده نکنید گیت ادیتور پیش‌فرض انتخاب شده‌تون رو نمایش خواهد داد تا پیام تگ رو وارد کنید. با ذخیره کردن و خروج از ادیتور عمل تگ انجام میشه.</p>
+<h4>تگ‌های امضا شده</h4>
+<p>برای امضا کردن تگ‌هاتون با کلید <a href="http://fa.wikipedia.org/wiki/GPG">GPG</a>، تنها کاری که باید بکنید استفاده از کلید <code>-s</code> به جای <code>-a</code> است:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git tag -s v1.5 -m &#39;my signed 1.5 tag&#39;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">You need a passphrase to unlock the secret key for
+</span><span style="background-color:#2b303b;color:#c0c5ce;">user: &quot;Scott Chacon &lt;schacon@gee-mail.com&gt;&quot;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">1024-bit DSA key, ID F721C45A, created 2009-02-09
+</span></pre>
+<p>اگر دستور <code>git show</code> رو اجرا کنید، می‌تونید امضا GPG خودتون رو ببینید.</p>
+<h3>تگ‌های Lightweight</h3>
+<p>برای این تگ‌ها از کلیدهای <code>-m</code>، <code>-s</code> یا <code>-a</code> استفاده نکنید:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git tag v1.4-lw
+</span><span style="background-color:#2b303b;color:#c0c5ce;">$ git tag
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v0.1
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.3
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.4-lw
+</span><span style="background-color:#2b303b;color:#c0c5ce;">v1.5
+</span></pre>
+<p>اگر اینبار دستور <code>git show</code> رو اجرا کنید فقط همون کامیت رو می‌بینید و اطلاعات بیشتری وجود نداره:</p>
+<pre style="background-color:#2b303b;">
+<span style="background-color:#2b303b;color:#c0c5ce;">$ git show v1.4-lw
+</span><span style="background-color:#2b303b;color:#c0c5ce;">commit 15027957951b64cf874c3557a0f3547bd83b3ff6
+</span><span style="background-color:#2b303b;color:#c0c5ce;">Merge: 4a447f7... a6b4c97...
+</span><span style="background-color:#2b303b;color:#c0c5ce;">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;
+</span><span style="background-color:#2b303b;color:#c0c5ce;">Date:   Sun Feb 8 19:02:46 2009 -0800
+</span><span style="background-color:#2b303b;color:#c0c5ce;">
+</span><span style="background-color:#2b303b;color:#c0c5ce;">    </span><span style="background-color:#2b303b;color:#c0c5ce;">Merge branch &#39;experiment&#39;
+</span></pre>
+<p>برای اطلاعات بیشتر در مورد تگ‌ها در گیت به <a href="http://git-scm.com/book/en/Git-Basics-Tagging">مستندات گیت</a> مراجعه کنید.</p>
+
+      </div>
+    </div>
+
+    <div id="disqus_thread" class='page rtl'></div>
+<script>
+  /**
+   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  /*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+   */
+  var disqus_shortname = 'arashm';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <div class='footer'>
+  <div class='footline'></div>
+  <div class='icons'>
+    <a href=https://twitter.com/TheAriaMo class='float-shadow'>
+      <i class='fa fa-twitter icon link'></i>
+    </a>
+
+    <a href=https://github.com/arashm class='float-shadow'>
+      <i class='fa fa-github icon link'></i>
+    </a>
+
+    <a href=https://www.linkedin.com/in/arashmousavi class='float-shadow'>
+      <i class='fa fa-linkedin icon link'></i>
+    </a>
+  </div>
+  <br />
+  <p> &copy; Arash Mousavi</p>
+</div>
+
+  </body>
+</html>
